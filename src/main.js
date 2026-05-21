@@ -84,6 +84,8 @@ async function handleSubmit(event) {
 }
 
 async function handleLoadMore() {
+  hideLoadMoreButton();
+
   currentPage += 1;
 
   showLoader();
@@ -97,7 +99,9 @@ async function handleLoadMore() {
 
     const totalPages = Math.ceil(totalHits / 15);
 
-    if (currentPage >= totalPages) {
+    if (currentPage < totalPages) {
+      showLoadMoreButton();
+    } else {
       hideLoadMoreButton();
 
       iziToast.info({
